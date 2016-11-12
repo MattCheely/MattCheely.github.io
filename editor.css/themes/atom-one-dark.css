@@ -1,0 +1,68 @@
+body {
+  background: #282c34;
+  color: #abb2bf;
+}
+h1,
+.h1,
+h2,
+.h2,
+h3,
+.h3,
+h4,
+.h4,
+h5,
+.h5,
+h6,
+.h6 {
+  color: #5c6370;
+}
+input[type="text"],
+input[type="password"],
+textarea {
+  border-bottom: 1px solid;
+  color: #61aeee;
+}
+input[type="checkbox"] + span,
+input[type="radio"] + span {
+  color: #61aeee;
+}
+select {
+  color: #61aeee;
+}
+option {
+  background: #282c34;
+}
+a {
+  color: #c678dd;
+}
+a:hover,
+a:hover > * {
+  background-color: #c678dd;
+  color: #282c34;
+}
+a.btn,
+a.btn:hover,
+button {
+  color: #e06c75;
+}
+a.btn.secondary,
+button.secondary {
+  color: #56b6c2;
+}
+a.btn.tertiary,
+button.tertiary {
+  color: #98c379;
+}
+a[disabled],
+a[disabled]:hover,
+button[disabled],
+button[disabled]:hover {
+  color: #5c6370;
+}
+th {
+  color: #e6c07b;
+}
+.status-line {
+  background: #282c34;
+  border-top: 1px solid #5c6370;
+}
