@@ -1,0 +1,46 @@
+@-webkit-keyframes dance {
+  100% {
+    margin-left: -70ch;
+  }
+}
+@keyframes dance {
+  100% {
+    margin-left: -70ch;
+  }
+}
+dance {
+  font-family: monospace;
+  overflow: hidden;
+  display: inline-block;
+  white-space: pre;
+  width: 7ch;
+}
+dance:before {
+  content: "<('.'<)(>'.')><('.'<)<('.'^)^('.'^)(^'.')>(>'.')><('.'<)(>'.')><(^.^)>";
+  display: inline-block;
+  -webkit-animation: dance 5s steps(10) infinite;
+          animation: dance 5s steps(10) infinite;
+}
+@-webkit-keyframes roflcopter {
+  100% {
+    margin-left: -48ch;
+  }
+}
+@keyframes roflcopter {
+  100% {
+    margin-left: -48ch;
+  }
+}
+roflcopter {
+  font-family: monospace;
+  overflow: hidden;
+  display: inline-block;
+  white-space: pre;
+  width: 24ch;
+}
+roflcopter:before {
+  content: "          :LOL:ROFL:ROFL ROFL:ROFL:LOL:         \A          ___^_____               ___^_____      \A  L      /      [] \\             /      [] \\     \A  O =====           \\    LOL=====           \\    \A  L      \\___________]           \\___________]   \A             I   I                   I   I       \A           ----------/             ----------/   ";
+  display: inline-block;
+  -webkit-animation: roflcopter 0.2s steps(2) infinite;
+          animation: roflcopter 0.2s steps(2) infinite;
+}
