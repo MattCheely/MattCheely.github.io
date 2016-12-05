@@ -1,0 +1,55 @@
+.ascii-anim,
+dance,
+roflcopter,
+tableflip {
+  display: inline-block;
+  font-family: monospace;
+  line-height: 1;
+  overflow: hidden;
+  white-space: pre;
+}
+@keyframes dance {
+  100% {
+    margin-top: -20em;
+  }
+}
+dance,
+.ascii-anim.dance {
+  height: 1.3em;
+}
+dance:before,
+.ascii-anim.dance:before {
+  content: "<('.'<)\A \A (>'.')>\A \A <('.'<)\A \A <('.'^)\A \A ^('.'^)\A \A (^'.')>\A \A (>'.')>\A \A <('.'<)\A \A (>'.')>\A \A <(^.^)>\A ";
+  display: inline-block;
+  animation: dance 5s steps(10) infinite;
+}
+@keyframes roflcopter {
+  100% {
+    margin-top: -16em;
+  }
+}
+roflcopter,
+.ascii-anim.roflcopter {
+  height: 7.3em;
+}
+roflcopter:before,
+.ascii-anim.roflcopter:before {
+  content: "          :LOL:ROFL:ROFL\A          ___^_____      \A  L      /      [] \\     \A  O =====           \\    \A  L      \\___________]   \A             I   I       \A           ----------/   \A \A  ROFL:ROFL:LOL:         \A          ___^_____      \A         /      [] \\     \A LOL=====           \\    \A         \\___________]   \A             I   I       \A           ----------/   \A ";
+  display: inline-block;
+  animation: roflcopter 0.2s steps(2) infinite;
+}
+@keyframes tableflip {
+  100% {
+    margin-top: -24em;
+  }
+}
+tableflip,
+.ascii-anim.tableflip {
+  height: 1.3em;
+}
+tableflip:before,
+.ascii-anim.tableflip:before {
+  content: "       ┬─┬   \A \A        ┬─┬   \A \A        ┬─┬   \A \A )      ┬─┬   \A \A °)     ┬─┬   \A \A □°)    ┬─┬   \A \A °□°)   ┬─┬   \A \A  °□°)  ┬─┬   \A \A ( °□°) ┬─┬   \A \A (╯°□°)╯︵ ┻━┻\A \A (╯°□°)╯︵ ┻━┻\A \A (╯°□°)╯︵ ┻━┻\A ";
+  display: inline-block;
+  animation: tableflip 1.2s steps(12) infinite;
+}
