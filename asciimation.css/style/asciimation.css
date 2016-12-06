@@ -1,8 +1,8 @@
 .ascii-anim,
 dance,
 roflcopter,
-tableback,
-tableflip {
+tableflip,
+tablereplace {
   display: inline-block;
   font-family: monospace;
   line-height: 1;
@@ -25,7 +25,7 @@ dance,
 }
 dance:before,
 .ascii-anim.dance:before {
-  content: "<('.'<)\A \A (>'.')>\A \A <('.'<)\A \A <('.'^)\A \A ^('.'^)\A \A (^'.')>\A \A (>'.')>\A \A <('.'<)\A \A (>'.')>\A \A <(^.^)>\A ";
+  content: "<('.'<)\A \A  (>'.')>\A \A <('.'<)\A \A <('.'^)\A \A ^('.'^)\A \A  (^'.')>\A \A  (>'.')>\A \A <('.'<)\A \A  (>'.')>\A \A <(^.^)>\A ";
   display: inline-block;
   -webkit-animation: dance 5s steps(10) infinite;
           animation: dance 5s steps(10) infinite;
@@ -51,27 +51,6 @@ roflcopter:before,
   -webkit-animation: roflcopter 0.2s steps(4) infinite;
           animation: roflcopter 0.2s steps(4) infinite;
 }
-@-webkit-keyframes tableback {
-  100% {
-    margin-top: -58em;
-  }
-}
-@keyframes tableback {
-  100% {
-    margin-top: -58em;
-  }
-}
-tableback,
-.ascii-anim.tableback {
-  height: 1.3em;
-}
-tableback:before,
-.ascii-anim.tableback:before {
-  content: "(╯°□°)╯  ┻━┻        \A \A (╯°□°)╯  ┻━┻        \A \A (╯°□°)╯  ┻━┻        \A \A (╯°□°)╯  ┻━┻       (\A \A (╯°□°)╯  ┻━┻      (°\A \A (╯°□°)╯  ┻━┻     (°_\A \A (╯°□°)╯  ┻━┻     (°_\A \A (╯°□°)╯  ┻━┻    (°_°\A \A (╯°□°)╯  ┻━┻   (°_° \A \A (╯°□°)╯  ┻━┻  (°_° )\A \A (╯°□°)╯  ┻━┻ (°_° ) \A \A (╯°□°)╯  ┻━┻(°_° )  \A \A (╯°□°)╯┬─┬ノ(°_°ノ) \A \A (╯°□°)╯┬─┬ノ(-_-ノ) \A \A (╯°□°)╯┬─┬ノ(-_-ノ) \A \A (╯°□°)╯┬─┬ノ(-_-ノ) \A \A (╯°□°)╯┬─┬ノ(-_-ノ) \A \A (╯°□°)╯┬─┬ノ(-_-ノ) \A \A ( •́₋•̀) ┬─┬ノ(-_-ノ)\A \A  (•́₋•̀ )┬─┬ノ(-_-ノ)\A \A (•́₋•̀ ) ┬─┬ノ(-_-ノ)\A \A •́₋•̀ )  ┬─┬ノ(-_-ノ)\A \A ₋•̀ )   ┬─┬ノ(-_-ノ)\A \A •̀ )    ┬─┬ノ(-_-ノ)\A \A  )     ┬─┬ノ(-_-ノ)\A \A )      ┬─┬ノ(-_-ノ)\A \A        ┬─┬ノ(-_-ノ)\A \A        ┬─┬ノ(-_-ノ)\A \A        ┬─┬ノ(-_-ノ)\A ";
-  display: inline-block;
-  -webkit-animation: tableback 10s steps(29) infinite;
-          animation: tableback 10s steps(29) infinite;
-}
 @-webkit-keyframes tableflip {
   100% {
     margin-top: -24em;
@@ -92,4 +71,25 @@ tableflip:before,
   display: inline-block;
   -webkit-animation: tableflip 1.2s steps(12) infinite;
           animation: tableflip 1.2s steps(12) infinite;
+}
+@-webkit-keyframes tablereplace {
+  100% {
+    margin-top: -52em;
+  }
+}
+@keyframes tablereplace {
+  100% {
+    margin-top: -52em;
+  }
+}
+tablereplace,
+.ascii-anim.tablereplace {
+  height: 1.3em;
+}
+tablereplace:before,
+.ascii-anim.tablereplace:before {
+  content: "(╯°□°)╯  ┻━┻        \A \A (╯°□°)╯  ┻━┻        \A \A (╯°□°)╯  ┻━┻        \A \A (╯°□°)╯  ┻━┻       (\A \A (╯°□°)╯  ┻━┻      (°\A \A (╯°□°)╯  ┻━┻     (°_\A \A (╯°□°)╯  ┻━┻    (°_°\A \A (╯°□°)╯  ┻━┻   (°_° \A \A (╯°□°)╯  ┻━┻  (°_° )\A \A (╯°□°)╯  ┻━┻ (°_° ) \A \A (╯°□°)╯  ┻━┻(°_° )  \A \A (╯°□°)╯  ┻━┻(°_° )  \A \A (╯°□°)╯┬─┬ノ(°_°ノ) \A \A (╯°□°)╯┬─┬ノ(-_-ノ) \A \A (╯°□°)╯┬─┬ノ(-_-ノ) \A \A (╯°□°)╯┬─┬ノ(-_-ノ) \A \A ( ⁺᷄₋⁺᷅) ┬─┬ノ(-_-ノ)\A \A (⁺᷄₋⁺᷅ ) ┬─┬ノ(-_-ノ)\A \A ⁺᷄₋⁺᷅ )  ┬─┬ノ(-_-ノ)\A \A ₋⁺᷅ )   ┬─┬ノ(-_-ノ)\A \A ⁺᷅ )    ┬─┬ノ(-_-ノ)\A \A  )     ┬─┬ノ(-_-ノ)\A \A )      ┬─┬ノ(-_-ノ)\A \A        ┬─┬ノ(-_-ノ)\A \A        ┬─┬ノ(-_-ノ)\A \A        ┬─┬ノ(-_-ノ)\A ";
+  display: inline-block;
+  -webkit-animation: tablereplace 10s steps(26) infinite;
+          animation: tablereplace 10s steps(26) infinite;
 }
