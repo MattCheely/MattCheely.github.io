@@ -1,0 +1,60 @@
+.body {
+  margin: 0;
+}
+
+.explainer {
+  display: flex;
+  flex-direction: column;
+}
+
+.app-embed {
+  flex-grow: 1;
+  flex-basis: 50%;
+  z-index: 10;
+  margin-top: -150px;
+}
+
+.app-embed > .wrapper {
+  text-align: center;
+}
+
+.elm-architecture {
+  flex-grow: 0;
+  flex-shrink: 0;
+  position: relative;
+  height: 500px;
+}
+
+.elm-architecture > svg {
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+
+.elm-architecture svg {
+  width: 100%;
+}
+
+svg text {
+  font-family: sans-serif;
+  font-size: 50px;
+}
+
+.cat-picker {
+  text-align: center;
+}
+
+.cat-picker img {
+  height: 200px;
+}
+
+button {
+  margin: 5px;
+}
+
+.slides code {
+  font-size: 25px;
+}
+
+
+/*# sourceMappingURL=style.css.map*/
