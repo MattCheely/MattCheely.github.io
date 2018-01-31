@@ -37773,7 +37773,7 @@ var _user$project$Main$main = A2(
 						_0: _xarvh$elm_slides$Slides$md('\n        ### Stateless & Isolated\n\n        ```elm\n        add x y =\n            x + y\n        ```\n        These don\'t work:\n        ```elm\n        add x y =\n            x + y + externalMutableState\n        ```\n\n        ```elm\n        add x y =\n            deleteUser \"joe\"\n            x + y\n        ```\n        '),
 						_1: {
 							ctor: '::',
-							_0: _xarvh$elm_slides$Slides$md('\n        ### Optional type annotations\n\n        ```elm\n        add : Int -> Int -> Int\n        add x y\n            = x + y\n        ```\n\n        ```elm\n        first : Array containedType -> Maybe containedType\n        first araay =\n            Array.get 0 list\n        ```\n\n        ```elm\n        update : Msg -> Model -> (Model, Cmd Msg)\n        update msg model =\n            ...\n        ```\n        '),
+							_0: _xarvh$elm_slides$Slides$md('\n        ### Optional type annotations\n\n        ```elm\n        add : Int -> Int -> Int\n        add x y\n            = x + y\n        ```\n\n        ```elm\n        first : Array containedType -> Maybe containedType\n        first array =\n            Array.get 0 array\n        ```\n\n        ```elm\n        update : Msg -> Model -> (Model, Cmd Msg)\n        update msg model =\n            ...\n        ```\n        '),
 							_1: {
 								ctor: '::',
 								_0: _xarvh$elm_slides$Slides$md('\n\n        ### Currying\n\n        It\'s like an automatic `Function.prototype.bind`\n\n        ```elm\n        add : Int -> Int -> Int\n        add x y\n            = x + y\n\n        add5 : Int -> Int\n        add5 = add 5\n\n        -- add5 10 => 15\n        ```\n        '),
