@@ -1,0 +1,130 @@
+body {
+    font-family: 'Lato', sans-serif !important;
+    background-color: #f5f5f5 !important;
+}
+
+section {
+    background-color: #f5f5f5 !important;
+    color: #233237 !important;
+}
+
+h1 sup {
+    font-size: .6em;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-weight: 400;
+}
+
+ul {
+    padding-left :0;
+}
+
+ul li {
+    list-style-type: none;
+    list-style-position: outside;
+    margin: .5em 0;
+}
+
+pre {
+    background-color: #FFF !important;
+    padding: 0 !important;
+}
+
+code {
+    font-family: 'PragmataPro', 'Fira Code';
+    padding: 0 .1em;
+    background-color: transparent !important;
+    color: #000000;
+    line-height: 24px;
+}
+
+pre > code {
+    color: #dcdcdc !important;
+    background-color: #3f3f3f !important;
+    font-size: 1.2rem;
+    display: block;
+    padding: 2%;
+}
+
+img[src="complexity.gif"] {
+    width: 50%;
+    margin-left: 25%;
+}
+
+img[src="dont-believe.gif"],
+img[src="testing-oops.gif"] {
+    width: 60%;
+    margin-left: 20%;
+}
+
+img[src="helpful.gif"] {
+    width: 30%;
+    vertical-align: middle;
+}
+img[src="unhelpful.gif"] {
+    width: 50%;
+    vertical-align: middle;
+}
+
+iframe {
+    border: none;
+}
+
+body.img-app img {
+    display: block;
+    margin: auto;
+}
+
+.explainer {
+    display: flex;
+    flex-direction: column;
+}
+
+.app-embed {
+    flex-grow: 1;
+    flex-basis: 50%;
+    z-index: 10;
+    margin-top: -150px;
+}
+
+.app-embed > .wrapper {
+    text-align: center;
+}
+
+.elm-architecture {
+    flex-grow: 0;
+    flex-shrink: 0;
+    position: relative;
+    height: 500px;
+}
+
+.elm-architecture > svg {
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+
+.elm-architecture svg {
+    width: 100%;
+}
+
+svg text {
+    font-family: sans-serif;
+    font-size: 50px;
+}
+
+.cat-picker {
+    text-align: center;
+}
+
+.cat-picker img {
+    height: 200px;
+}
+
+button {
+    margin: 5px;
+}
+
+
+/*# sourceMappingURL=style.css.map*/

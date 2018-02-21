@@ -1,0 +1,24 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Parse Stuff</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body class="img-app">
+    <script src="js/app.js"></script>
+    <script>
+     function load () {
+            var module = window.location.search.slice(1);
+            console.log("Mounting", module);
+            // Start Elm app in fullscreen mode
+            require(`elm/${module}.elm`)[module].fullscreen();
+     }
+     window.onload = load;
+     window.onlocationchange = load;
+    </script>
+</body>
+
+</html>
