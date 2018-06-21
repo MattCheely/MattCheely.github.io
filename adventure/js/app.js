@@ -11163,6 +11163,7 @@ var _user$project$Creature$attack = F3(
 		var _p4 = A2(_elm_lang$core$Random$step, damageGenerator, seed);
 		var damage = _p4._0;
 		var randomSeed = _p4._1;
+		var result = _elm_lang$core$Native_Utils.eq(damage, 0) ? _user$project$Creature$Miss : _user$project$Creature$Hit(damage);
 		return {
 			ctor: '_Tuple2',
 			_0: {
@@ -11170,7 +11171,7 @@ var _user$project$Creature$attack = F3(
 				victim: _elm_lang$core$Native_Utils.update(
 					victim,
 					{hitPoints: victim.hitPoints - damage}),
-				result: _user$project$Creature$Hit(damage)
+				result: result
 			},
 			_1: randomSeed
 		};
@@ -11180,11 +11181,11 @@ var _user$project$Combat$encode = function (model) {
 	return _elm_lang$core$Json_Encode$object(
 		{ctor: '[]'});
 };
-var _user$project$Combat$showAllies = function (allies) {
+var _user$project$Combat$onAnimationEnd = function (msg) {
 	return A2(
-		_elm_lang$html$Html$div,
-		{ctor: '[]'},
-		A2(_elm_lang$core$List$map, _user$project$Creature$showSprite, allies));
+		_elm_lang$html$Html_Events$on,
+		'animationend',
+		_elm_lang$core$Json_Decode$succeed(msg));
 };
 var _user$project$Combat$inParty = F2(
 	function (model, creature) {
@@ -11247,28 +11248,29 @@ var _user$project$Combat$Model = F6(
 		return {turnHistory: a, party: b, turn: c, turnOrder: d, status: e, randomSeed: f};
 	});
 var _user$project$Combat$Ongoing = {ctor: 'Ongoing'};
-var _user$project$Combat$init = function (player) {
-	return {
-		turnHistory: {ctor: '[]'},
-		party: {
-			ctor: '::',
-			_0: player.id,
-			_1: {ctor: '[]'}
-		},
-		turn: 0,
-		turnOrder: {
-			ctor: '::',
-			_0: player,
-			_1: {
+var _user$project$Combat$init = F2(
+	function (player, seed) {
+		return {
+			turnHistory: {ctor: '[]'},
+			party: {
 				ctor: '::',
-				_0: A2(_user$project$Creature$new, _user$project$Creature$Goblin, ''),
+				_0: player.id,
 				_1: {ctor: '[]'}
-			}
-		},
-		status: _user$project$Combat$Ongoing,
-		randomSeed: _elm_lang$core$Random$initialSeed(1)
-	};
-};
+			},
+			turn: 0,
+			turnOrder: {
+				ctor: '::',
+				_0: player,
+				_1: {
+					ctor: '::',
+					_0: A2(_user$project$Creature$new, _user$project$Creature$Goblin, ''),
+					_1: {ctor: '[]'}
+				}
+			},
+			status: _user$project$Combat$Ongoing,
+			randomSeed: _elm_lang$core$Random$initialSeed(seed)
+		};
+	});
 var _user$project$Combat$Defeat = {ctor: 'Defeat'};
 var _user$project$Combat$Victory = {ctor: 'Victory'};
 var _user$project$Combat$gameStatus = F2(
@@ -11344,19 +11346,81 @@ var _user$project$Combat$doNPCAttacks = F2(
 var _user$project$Combat$update = F3(
 	function (msg, model, userId) {
 		var _p4 = msg;
+		if (_p4.ctor === 'PlayerAttack') {
+			return A2(
+				_user$project$Combat$doNPCAttacks,
+				userId,
+				A4(_user$project$Combat$handleAttack, userId, userId, _p4._0, model));
+		} else {
+			return _elm_lang$core$Native_Utils.update(
+				model,
+				{
+					turnHistory: A2(
+						_elm_lang$core$List$filter,
+						function (attack) {
+							return !_elm_lang$core$Native_Utils.eq(attack.victim.id, _p4._0);
+						},
+						model.turnHistory)
+				});
+		}
+	});
+var _user$project$Combat$ClearAttacks = function (a) {
+	return {ctor: 'ClearAttacks', _0: a};
+};
+var _user$project$Combat$showCreature = F2(
+	function (attacks, creature) {
+		var wasHit = A2(
+			_elm_lang$core$List$any,
+			function (attack) {
+				var _p5 = attack.result;
+				if (_p5.ctor === 'Hit') {
+					return _elm_lang$core$Native_Utils.eq(attack.victim.id, creature.id);
+				} else {
+					return false;
+				}
+			},
+			attacks);
 		return A2(
-			_user$project$Combat$doNPCAttacks,
-			userId,
-			A4(_user$project$Combat$handleAttack, userId, userId, _p4._0, model));
+			_elm_lang$html$Html$div,
+			{
+				ctor: '::',
+				_0: _elm_lang$html$Html_Attributes$classList(
+					{
+						ctor: '::',
+						_0: {ctor: '_Tuple2', _0: 'wasHit', _1: wasHit},
+						_1: {ctor: '[]'}
+					}),
+				_1: {
+					ctor: '::',
+					_0: _user$project$Combat$onAnimationEnd(
+						_user$project$Combat$ClearAttacks(creature.id)),
+					_1: {ctor: '[]'}
+				}
+			},
+			{
+				ctor: '::',
+				_0: _user$project$Creature$showSprite(creature),
+				_1: {ctor: '[]'}
+			});
+	});
+var _user$project$Combat$showAllies = F2(
+	function (allies, attacks) {
+		return A2(
+			_elm_lang$html$Html$div,
+			{ctor: '[]'},
+			A2(
+				_elm_lang$core$List$map,
+				_user$project$Combat$showCreature(attacks),
+				allies));
 	});
 var _user$project$Combat$PlayerAttack = function (a) {
 	return {ctor: 'PlayerAttack', _0: a};
 };
-var _user$project$Combat$showEnemy = F3(
-	function (isPlayerTurn, playerType, enemy) {
+var _user$project$Combat$showEnemy = F4(
+	function (isPlayerTurn, playerType, attacks, enemy) {
 		var attackClass = function () {
-			var _p5 = playerType;
-			if (_p5.ctor === 'Wizard') {
+			var _p6 = playerType;
+			if (_p6.ctor === 'Wizard') {
 				return 'spellAttack';
 			} else {
 				return 'weaponAttack';
@@ -11382,18 +11446,18 @@ var _user$project$Combat$showEnemy = F3(
 		return baseElement(
 			{
 				ctor: '::',
-				_0: _user$project$Creature$showSprite(enemy),
+				_0: A2(_user$project$Combat$showCreature, attacks, enemy),
 				_1: {ctor: '[]'}
 			});
 	});
-var _user$project$Combat$showEnemies = F3(
-	function (enemies, isPlayerTurn, playerType) {
+var _user$project$Combat$showEnemies = F4(
+	function (enemies, isPlayerTurn, playerType, attacks) {
 		return A2(
 			_elm_lang$html$Html$div,
 			{ctor: '[]'},
 			A2(
 				_elm_lang$core$List$map,
-				A2(_user$project$Combat$showEnemy, isPlayerTurn, playerType),
+				A3(_user$project$Combat$showEnemy, isPlayerTurn, playerType, attacks),
 				enemies));
 	});
 var _user$project$Combat$combat = F2(
@@ -11430,8 +11494,10 @@ var _user$project$Combat$combat = F2(
 							},
 							{
 								ctor: '::',
-								_0: _user$project$Combat$showAllies(
-									_user$project$Combat$getParty(model)),
+								_0: A2(
+									_user$project$Combat$showAllies,
+									_user$project$Combat$getParty(model),
+									model.turnHistory),
 								_1: {ctor: '[]'}
 							}),
 						_1: {
@@ -11445,11 +11511,12 @@ var _user$project$Combat$combat = F2(
 								},
 								{
 									ctor: '::',
-									_0: A3(
+									_0: A4(
 										_user$project$Combat$showEnemies,
 										_user$project$Combat$getEnemies(model),
 										A2(_user$project$Combat$isPlayerTurn, model, userId),
-										playerType),
+										playerType,
+										model.turnHistory),
 									_1: {ctor: '[]'}
 								}),
 							_1: {ctor: '[]'}
@@ -11460,8 +11527,8 @@ var _user$project$Combat$combat = F2(
 	});
 var _user$project$Combat$view = F2(
 	function (userId, model) {
-		var _p6 = model.status;
-		switch (_p6.ctor) {
+		var _p7 = model.status;
+		switch (_p7.ctor) {
 			case 'Victory':
 				return A2(
 					_elm_lang$html$Html$div,
@@ -11577,9 +11644,9 @@ var _user$project$Main$subs = function (model) {
 var _user$project$Main$characterView = function (character) {
 	return _user$project$Creature$showSprite(character);
 };
-var _user$project$Main$Model = F3(
-	function (a, b, c) {
-		return {userId: a, token: b, appModel: c};
+var _user$project$Main$Model = F4(
+	function (a, b, c, d) {
+		return {userId: a, token: b, appModel: c, seed: d};
 	});
 var _user$project$Main$AdventureModel = F2(
 	function (a, b) {
@@ -11592,8 +11659,8 @@ var _user$project$Main$SelectingCharacter = {ctor: 'SelectingCharacter'};
 var _user$project$Main$CombatView = function (a) {
 	return {ctor: 'CombatView', _0: a};
 };
-var _user$project$Main$updateAdventure = F3(
-	function (userId, msg, model) {
+var _user$project$Main$updateAdventure = F4(
+	function (seed, userId, msg, model) {
 		var _p0 = function () {
 			var _p1 = {ctor: '_Tuple2', _0: msg, _1: model.route};
 			_v0_2:
@@ -11603,7 +11670,7 @@ var _user$project$Main$updateAdventure = F3(
 						return {
 							ctor: '_Tuple2',
 							_0: _user$project$Main$CombatView(
-								_user$project$Combat$init(model.character)),
+								A2(_user$project$Combat$init, model.character, seed)),
 							_1: _elm_lang$core$Platform_Cmd$none
 						};
 					} else {
@@ -11641,6 +11708,13 @@ var _user$project$Main$updateAdventure = F3(
 	});
 var _user$project$Main$CharacterView = {ctor: 'CharacterView'};
 var _user$project$Main$init = function (config) {
+	var seed = A2(
+		_elm_lang$core$Result$withDefault,
+		42,
+		A2(
+			_elm_lang$core$Json_Decode$decodeValue,
+			A2(_elm_lang$core$Json_Decode$field, 'seed', _elm_lang$core$Json_Decode$int),
+			config));
 	var charDecodeResult = A2(
 		_elm_lang$core$Json_Decode$decodeValue,
 		A2(_elm_lang$core$Json_Decode$field, 'char', _user$project$Creature$decoder),
@@ -11670,12 +11744,12 @@ var _user$project$Main$init = function (config) {
 			config));
 	return {
 		ctor: '_Tuple2',
-		_0: {userId: userId, token: token, appModel: appModel},
+		_0: {userId: userId, token: token, seed: seed, appModel: appModel},
 		_1: _elm_lang$core$Platform_Cmd$none
 	};
 };
-var _user$project$Main$updateApp = F3(
-	function (userId, msg, appModel) {
+var _user$project$Main$updateApp = F4(
+	function (seed, userId, msg, appModel) {
 		var _p4 = {ctor: '_Tuple2', _0: appModel, _1: msg};
 		_v2_2:
 		do {
@@ -11696,7 +11770,7 @@ var _user$project$Main$updateApp = F3(
 					return A2(
 						_elm_lang$core$Tuple$mapFirst,
 						_user$project$Main$WithCharacter,
-						A3(_user$project$Main$updateAdventure, userId, _p4._1._0, _p4._0._0));
+						A4(_user$project$Main$updateAdventure, seed, userId, _p4._1._0, _p4._0._0));
 				} else {
 					break _v2_2;
 				}
@@ -11709,7 +11783,7 @@ var _user$project$Main$updateApp = F3(
 	});
 var _user$project$Main$update = F2(
 	function (msg, model) {
-		var _p5 = A3(_user$project$Main$updateApp, model.userId, msg, model.appModel);
+		var _p5 = A4(_user$project$Main$updateApp, model.seed, model.userId, msg, model.appModel);
 		var appModel = _p5._0;
 		var cmd = _p5._1;
 		return {
@@ -11897,7 +11971,8 @@ module.exports = {
                 const app = require('elm/Main.elm').Main.fullscreen({
                     userId: "arglebarf",
                     token: "tokenBoken",
-                    char: null
+                    char: null,
+                    seed: Date.now()
                 });
 
                 app.ports.toJs.subscribe(this.fromElm.bind(this));
