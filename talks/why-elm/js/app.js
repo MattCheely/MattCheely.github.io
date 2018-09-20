@@ -54099,7 +54099,7 @@ var _user$project$Main$main = A2(
 																								_0: '\n              ## Luckily we have tests.\n\n              ```javascript\n              assertTrue( 6 == multiply(2,3) ); // It Passes!\n              ```\n              ',
 																								_1: {
 																									ctor: '::',
-																									_0: '\n              ## Thorough tests...\n\n              ```javascript\n              window.oppositeDay = true;\n              assertTrue( 6 == multiply(2,3) ); // It Still Passes! Wicked Awesome!\n              ```\n              ',
+																									_0: '\n              ## Thorough tests...\n\n              ```javascript\n              window.oppositeDay = true;\n              assertTrue( 6 == multiply(2,3) ); // It Still Passes!\n              ```\n              ',
 																									_1: {ctor: '[]'}
 																								}
 																							}
@@ -54136,7 +54136,7 @@ var _user$project$Main$main = A2(
 																									_0: _xarvh$elm_slides$Slides$md('\n             ## What about our other function?\n\n             ```elm\n             multiply n1 n2 =\n                 { window | oppositeDay = true }\n                 Api.igniteServer\n                 n1 * n2\n             ```\n             '),
 																									_1: {
 																										ctor: '::',
-																										_0: _xarvh$elm_slides$Slides$md('\n             ## Functions in Elm are isolated\n\n             They cannot change the behavior of other code or trigger arbitrary side-effects.\n\n             ```elm\n             multiply n1 n2 =\n                 -- window is immutable, this creates a new object\n                 { window | oppositeDay = true }\n\n                 -- This is a value representing an API call.\n                 -- It does nothing on it\'s own\n                 Api.igniteServer\n\n                 -- This is the only value returned, everything else is dead code\n                 n1 * n2\n             ```\n             '),
+																										_0: _xarvh$elm_slides$Slides$md('\n             ## Functions in Elm are isolated\n\n             They cannot change the behavior of other code or trigger arbitrary side-effects.\n\n             ```elm\n             multiply n1 n2 =\n                 -- Window is immutable, this creates a new object.\n                 { window | oppositeDay = true }\n\n                 -- This is a value representing an API call.\n                 -- It does nothing on it\'s own.\n                 Api.igniteServer\n\n                 -- This would multiply the two numbers, if this\n                 -- function compiled, but it won\'t.\n                 n1 * n2\n             ```\n             '),
 																										_1: {
 																											ctor: '::',
 																											_0: _xarvh$elm_slides$Slides$mdFragments(

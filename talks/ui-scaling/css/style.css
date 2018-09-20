@@ -1,0 +1,38 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+  font-family: "sans-serif";
+  margin: 0;
+  padding: 0;
+}
+
+.year-sim {
+    display: flex;
+}
+
+.week-sim {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    flex-shrink: 1;
+}
+
+.release.has-feature {
+    width: 100%;
+    border: 1px solid #FFF;
+}
+
+.release.has-feature::before {
+    content: '';
+    float: left;
+    padding-top: 100%;
+}
+
+.week-sim.has-issue .release {
+    background-color: #FF0000;
+}
+
+
+/*# sourceMappingURL=style.css.map*/

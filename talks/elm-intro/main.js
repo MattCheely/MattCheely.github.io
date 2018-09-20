@@ -37788,87 +37788,95 @@ var _user$project$Main$main = A2(
 											_0: _xarvh$elm_slides$Slides$md('\n        ### Reading & Changing Records\n\n        ```elm\n        bobAge = bob.age\n\n        bobAge = .age bob\n\n        bobClone = { bob | age = 0 }\n        ```\n        '),
 											_1: {
 												ctor: '::',
-												_0: _xarvh$elm_slides$Slides$md('\n        # Union Types\n\n        Like enums with extra data\n        '),
+												_0: _xarvh$elm_slides$Slides$md('\n        # Custom Types\n\n        Like enums with extra data\n        '),
 												_1: {
 													ctor: '::',
 													_0: _xarvh$elm_slides$Slides$md('\n        ```elm\n        type Bool\n            = True\n            | False\n\n        type ContrivedIntegerParseResult\n            = Success Int\n            | Failure String\n\n        type Result error value\n            = Ok value\n            | Err error\n\n        type Maybe a\n            = Just a\n            | Nothing\n\n        type RemoteData err val\n            = NotAsked\n            | Loading\n            | Failure err\n            | Success val\n        ```\n        '),
 													_1: {
 														ctor: '::',
-														_0: _xarvh$elm_slides$Slides$md('\n        # The Elm Architecture (TEA)\n\n        Stuff gets weird\n        '),
+														_0: _xarvh$elm_slides$Slides$md('\n        ### Using Custom Types\n\n        ```elm\n        showParseResult : Result String Int -> Html msg\n        showParseResult result =\n            case result of\n\n                Ok value ->\n                    text (\"Result was: \" ++ (String.fromInt value))\n\n                Err errMsg ->\n                    text (\"Unable to parse input: \" ++ errMsg)\n        ```\n        '),
 														_1: {
 															ctor: '::',
-															_0: _xarvh$elm_slides$Slides$md('\n        ### Only one(ish) way to structure an application in Elm\n\n        ```elm\n        main =\n            Html.program\n                { init = init\n                , update = update\n                , view = view\n                , subscriptions = subs\n                }\n\n        init : (Model, Cmd Msg)\n\n        update : Msg -> Model -> (Model, Cmd Msg)\n\n        view : Model -> Html Msg\n\n        subs: Model -> Sub Msg\n        ```\n\n        `Msg`, `Model` are app-defined types\n        '),
+															_0: _xarvh$elm_slides$Slides$md('\n        ```elm\n        userView : RemoteData Http.Error User -> Html msg\n        userView userRequest =\n            case userRequest of\n\n                NotAsked ->\n                    button [ onClick LoadUser ]\n                        [ text \"Click to load user\" ]\n\n                Loading ->\n                    showSpinner\n\n                Success user ->\n                    userProfile user\n\n                Failure error ->\n                    div [ class \"error\" ]\n                        [ div [] [ text \"Error loading user!\" ]\n                        , div [] [ httpErrorDetails error ]\n                        ]\n        ```\n\n        '),
 															_1: {
 																ctor: '::',
-																_0: _xarvh$elm_slides$Slides$html(
-																	A2(
-																		_elm_lang$html$Html$div,
-																		{ctor: '[]'},
-																		{
-																			ctor: '::',
-																			_0: A2(
-																				_elm_lang$html$Html$h1,
+																_0: _xarvh$elm_slides$Slides$md('\n        # The Elm Architecture (TEA)\n\n        Stuff gets weird\n        '),
+																_1: {
+																	ctor: '::',
+																	_0: _xarvh$elm_slides$Slides$md('\n        ### Only one(ish) way to structure an application in Elm\n\n        ```elm\n        main =\n            Browser.element\n                { init = init\n                , update = update\n                , view = view\n                , subscriptions = subs\n                }\n\n        init : flags -> (model, Cmd msg)\n\n        update : msg -> model -> (model, Cmd msg)\n\n        view : model -> Html msg\n\n        subs: model -> Sub msg\n        ```\n\n        `msg`, `model` are developer-defined types\n        '),
+																	_1: {
+																		ctor: '::',
+																		_0: _xarvh$elm_slides$Slides$html(
+																			A2(
+																				_elm_lang$html$Html$div,
 																				{ctor: '[]'},
 																				{
 																					ctor: '::',
-																					_0: _elm_lang$html$Html$text('Let\'s see it in action!'),
-																					_1: {ctor: '[]'}
-																				}),
-																			_1: {
-																				ctor: '::',
-																				_0: A2(
-																					_elm_lang$html$Html$div,
-																					{ctor: '[]'},
-																					{
-																						ctor: '::',
-																						_0: A2(
-																							_elm_lang$html$Html$a,
-																							{
-																								ctor: '::',
-																								_0: _elm_lang$html$Html_Attributes$href('simple-explainer.html'),
-																								_1: {
-																									ctor: '::',
-																									_0: _elm_lang$html$Html_Attributes$target('_blank'),
-																									_1: {ctor: '[]'}
-																								}
-																							},
-																							{
-																								ctor: '::',
-																								_0: _elm_lang$html$Html$text('Simple Version'),
-																								_1: {ctor: '[]'}
-																							}),
-																						_1: {ctor: '[]'}
-																					}),
-																				_1: {
-																					ctor: '::',
 																					_0: A2(
-																						_elm_lang$html$Html$div,
+																						_elm_lang$html$Html$h1,
 																						{ctor: '[]'},
 																						{
 																							ctor: '::',
-																							_0: A2(
-																								_elm_lang$html$Html$a,
-																								{
-																									ctor: '::',
-																									_0: _elm_lang$html$Html_Attributes$href('giphy-explainer.html'),
-																									_1: {
+																							_0: _elm_lang$html$Html$text('Let\'s see it in action!'),
+																							_1: {ctor: '[]'}
+																						}),
+																					_1: {
+																						ctor: '::',
+																						_0: A2(
+																							_elm_lang$html$Html$div,
+																							{ctor: '[]'},
+																							{
+																								ctor: '::',
+																								_0: A2(
+																									_elm_lang$html$Html$a,
+																									{
 																										ctor: '::',
-																										_0: _elm_lang$html$Html_Attributes$target('_blank'),
+																										_0: _elm_lang$html$Html_Attributes$href('simple-explainer.html'),
+																										_1: {
+																											ctor: '::',
+																											_0: _elm_lang$html$Html_Attributes$target('_blank'),
+																											_1: {ctor: '[]'}
+																										}
+																									},
+																									{
+																										ctor: '::',
+																										_0: _elm_lang$html$Html$text('Simple Version'),
 																										_1: {ctor: '[]'}
-																									}
-																								},
+																									}),
+																								_1: {ctor: '[]'}
+																							}),
+																						_1: {
+																							ctor: '::',
+																							_0: A2(
+																								_elm_lang$html$Html$div,
+																								{ctor: '[]'},
 																								{
 																									ctor: '::',
-																									_0: _elm_lang$html$Html$text('Complex Version'),
+																									_0: A2(
+																										_elm_lang$html$Html$a,
+																										{
+																											ctor: '::',
+																											_0: _elm_lang$html$Html_Attributes$href('giphy-explainer.html'),
+																											_1: {
+																												ctor: '::',
+																												_0: _elm_lang$html$Html_Attributes$target('_blank'),
+																												_1: {ctor: '[]'}
+																											}
+																										},
+																										{
+																											ctor: '::',
+																											_0: _elm_lang$html$Html$text('Complex Version'),
+																											_1: {ctor: '[]'}
+																										}),
 																									_1: {ctor: '[]'}
 																								}),
 																							_1: {ctor: '[]'}
-																						}),
-																					_1: {ctor: '[]'}
-																				}
-																			}
-																		})),
-																_1: {ctor: '[]'}
+																						}
+																					}
+																				})),
+																		_1: {ctor: '[]'}
+																	}
+																}
 															}
 														}
 													}

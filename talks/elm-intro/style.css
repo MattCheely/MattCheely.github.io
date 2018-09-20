@@ -1,3 +1,7 @@
+* {
+    box-sizing: border-box;
+}
+
 .body {
   margin: 0;
 }
@@ -53,7 +57,12 @@ button {
 }
 
 .slides code {
+  font-family: 'Iosevka', sans-serif;
   font-size: 25px;
+}
+
+.slide-content {
+    flex-grow: 1; 
 }
 
 
