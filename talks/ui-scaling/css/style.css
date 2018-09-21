@@ -3,19 +3,84 @@
 }
 
 body {
-  font-family: "sans-serif";
+  font-family: 'Roboto', sans-serif;
+  font-size: 14px;
+  line-height: 24px;
   margin: 0;
-  padding: 0;
+  padding: 20px;
+  color: #444A52;
+  background: #FDFDFD;
+}
+
+h1 {
+    font-size: 24px;
+    line-height: 32px;
+    font-weight: 300;
+}
+
+h2 {
+    font-size: 18px;
+    line-height: 24px;
+    font-weight: 300;
+}
+
+button {
+    background-color: #2A60C8;
+    border: 1px solid #2455A3;
+    color: #FDFDFD;
+    height: 36px;
+    padding: 0 16px;
+    border-radius: 2px;
+    margin: 4px 0;
+}
+
+.settings-actions {
+    text-align: right;
+    padding-right: 6ch;
+}
+
+.settings-view,
+.release-legend {
+    display: inline-block;
+    margin-bottom: 20px;
+    vertical-align: top;
+    margin-right: 20px;
+}
+
+.range-setting {
+    text-align: right;
+}
+
+.range-setting > * {
+    vertical-align: middle;
+}
+
+.range-setting > .val-display {
+    display: inline-block;
+    width: 5ch;
+    text-align: left
+}
+
+.sim-stats {
+    font-weight: bold;
+    margin-bottom: 20px;
+    font-size: 14px;
+    line-height: 20px;
 }
 
 .year-sim {
     display: flex;
 }
 
+.week-label {
+    text-align: center;
+}
+
 .week-sim {
     display: flex;
     flex-direction: column;
     flex-grow: 1;
+    flex-basis: 1px;
     flex-shrink: 1;
 }
 
@@ -30,9 +95,33 @@ body {
     padding-top: 100%;
 }
 
-.week-sim.has-issue .release {
-    background-color: #FF0000;
+.release-legend .release {
+    display: inline-block;
+    height: 15px;
+    width: 15px;
 }
 
+.release-legend .legend-item > * {
+    vertical-align: middle;
+}
 
-/*# sourceMappingURL=style.css.map*/
+.release-legend .all-types {
+    background: linear-gradient(135deg, #203b73 0%,#203b73 33%,#fabb00 33%,#fabb00 66%,#f53131 66%); 
+    border: 1px solid #444A52;
+}
+
+.release-legend .release,
+.week-sim .release {
+    background-color: #203B73;
+}
+
+.release-legend .release.was-impacted,
+.week-sim.has-issue .release {
+    background-color: #FABB00;
+}
+
+.release-legend .release.has-issue,
+.week-sim .release.has-issue {
+    background-color: #F53131
+}
+
