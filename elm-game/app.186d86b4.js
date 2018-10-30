@@ -3,4 +3,4 @@ parcelRequire=function(e,r,n,t){var i="function"==typeof parcelRequire&&parcelRe
 },{}],"QdeU":[function(require,module,exports) {
 "use strict";var i=require("../elm/Main.elm");i.Elm.Main.init();
 },{"../elm/Main.elm":"ENeC"}]},{},["QdeU"], null)
-//# sourceMappingURL=/app.e2aa2fac.map
+//# sourceMappingURL=app.e2aa2fac.map
