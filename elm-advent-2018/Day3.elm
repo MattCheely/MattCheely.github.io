@@ -7,7 +7,7 @@ import Set exposing (Set)
 
 
 
--- Parse Input
+-- Input Parsing
 
 
 type alias Claim =
@@ -66,17 +66,6 @@ part1 claimList =
     let
         markedFabric =
             markAllOverlaps claims emptyFabric
-
-        markStr =
-            markedFabric
-                |> Array.map
-                    (\row ->
-                        Array.map String.fromInt row
-                            |> Array.toList
-                            |> String.join ""
-                    )
-                |> Array.toList
-                |> String.join "\n"
     in
     countMarks markedFabric
 
