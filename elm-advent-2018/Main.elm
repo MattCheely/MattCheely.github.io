@@ -192,7 +192,7 @@ getDayCode : Int -> Cmd Msg
 getDayCode day =
     let
         url =
-            "/Day" ++ String.fromInt day ++ ".elm"
+            "Day" ++ String.fromInt day ++ ".elm"
     in
     Http.get
         { url = url
