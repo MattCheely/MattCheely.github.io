@@ -8,6 +8,7 @@ import Data.Day2 as Day2
 import Day1
 import Day2
 import Day3
+import Day4
 import Html exposing (Html, a, button, code, div, h1, h2, nav, p, pre, span, text)
 import Html.Attributes exposing (class, href)
 import Html.Events exposing (onClick)
@@ -44,6 +45,14 @@ solve dayNum dayPart =
                 Two ->
                     Day3.part2 Day3.claims |> String.fromInt
 
+        4 ->
+            case dayPart of
+                One ->
+                    Day4.part1 Day4.parsedShifts |> String.fromInt
+
+                Two ->
+                    Day4.part2 Day4.parsedShifts |> String.fromInt
+
         _ ->
             "lowut"
 
@@ -55,6 +64,7 @@ solve dayNum dayPart =
 solutions =
     Array.fromList
         [ emptySolution
+        , emptySolution
         , emptySolution
         , emptySolution
         ]
