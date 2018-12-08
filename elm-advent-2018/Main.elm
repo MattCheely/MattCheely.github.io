@@ -5,11 +5,17 @@ import Browser exposing (Document, UrlRequest(..))
 import Browser.Navigation as Navigation
 import Data.Day2 as Day2
 import Day1
+import Day11
 import Day2
 import Day3
 import Day4
+import Day5
+import Day6
+import Day7
+import Day8
+import Day9
 import Html exposing (Html, a, button, code, div, h1, h2, nav, p, pre, span, text)
-import Html.Attributes exposing (class, href)
+import Html.Attributes exposing (class, href, target)
 import Html.Events exposing (onClick)
 import Http
 import SyntaxHighlight as Highlight
@@ -30,6 +36,33 @@ solvers =
       ]
     , [ \_ -> Day4.part1 Day4.parsedShifts |> String.fromInt
       , \_ -> Day4.part2 Day4.parsedShifts |> String.fromInt
+      ]
+    , [ \_ -> Day5.part1 Day5.polymerStr |> String.fromInt
+      , \_ -> Day5.part2 Day5.polymerStr |> String.fromInt
+      ]
+    , [ \_ -> Day6.part1 Day6.coordinates |> String.fromInt
+      , \_ -> Day6.part2 Day6.coordinates |> String.fromInt
+      ]
+    , [ \_ -> Day7.part1 Day7.dependencies
+      , \_ -> Day7.part2 Day7.dependencies |> String.fromInt
+      ]
+    , [ \_ -> Day8.part1 Day8.tree |> String.fromInt
+      , \_ -> Day8.part2 Day8.tree |> String.fromInt
+      ]
+    , [ \_ -> Day9.part1 Day9.initialGame |> String.fromInt
+      , \_ -> Day9.part1 Day9.initialGame2 |> String.fromInt
+      ]
+    , [ \_ -> "My link is broken. Go to /day10.html"
+      , \_ -> "My link is broken. Go to /day10.html"
+      ]
+    , [ \_ ->
+            Day11.part1 Day11.serialNumber
+                |> (\( x, y ) -> String.fromInt x ++ "," ++ String.fromInt y)
+      , \_ ->
+            Day11.part2 Day11.serialNumber
+                |> (\( x, y, size ) ->
+                        String.fromInt x ++ "," ++ String.fromInt y ++ "," ++ String.fromInt size
+                   )
       ]
     ]
         |> List.map Array.fromList
@@ -360,19 +393,11 @@ introView =
             [ text "These are my solutions for the "
             , a [ href "https://adventofcode.com/2018" ] [ text "2018 Advent of Code" ]
             , text """
-        in Elm. I've had fun working on them. They've been good exercise
-        for some of the things I do less often in Elm, like writing
-        recursive funtions and parsers. """
+        in Elm. I had fun working on them and sharing solutions with co-workers.
+        They've been good practice for the things I do less often in Elm, like writing
+        recursive funtions and parsers. I wasn't able finish all of
+        them, due to a busy holiday season, but I still had fun!"""
             ]
-        , p [] [ text """
-        If you're here trying to evaluate Elm as a language, I want to
-        note that these sorts of problems don't play to Elm's
-        biggest strenghts, IMHO.  It's not that Elm is worse for handling
-        these problems than other languages. It's fine in that regard.
-        However, Elm really shines when
-        dealing with things like managing changing application state and
-        handling unreliable input, none of which are present here.
-        """ ]
         ]
 
 
@@ -412,12 +437,16 @@ partHeader dayPart dayNum day =
 
 solutionView : DayPart -> Int -> Maybe String -> Html Msg
 solutionView dayPart dayNum solution =
-    case solution of
-        Just string ->
-            span [] [ text string ]
+    if dayNum == 10 then
+        a [ class "button", href "day10.html", target "day10" ] [ text "Run" ]
 
-        Nothing ->
-            button [ onClick (RunProblem dayNum dayPart) ] [ text "Run" ]
+    else
+        case solution of
+            Just string ->
+                span [] [ text string ]
+
+            Nothing ->
+                button [ onClick (RunProblem dayNum dayPart) ] [ text "Run" ]
 
 
 codeView : String -> Html Msg
